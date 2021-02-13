@@ -26,13 +26,7 @@ def __Eykvel_binarization_helper(x, y, r_step, R_step, old_image, new_image, dif
         new_image[y:min(y + r_step, old_image.shape[0]),
                   x:min(x + r_step, old_image.shape[1])][s_window > t] = 255
     else:
-        try:
-            center = s_window[s_window.shape[0] // 2, s_window.shape[1] // 2]
-        except Exception as e:
-            print(s_window)
-            print(y, min(y + r_step, old_image.shape[0]),
-                  x, min(x + r_step, old_image.shape[1]))
-            exit(1)
+        center = s_window[s_window.shape[0] // 2, s_window.shape[1] // 2]
         if abs(m1 - center) < abs(m2 - center):
             new_image[y:min(y + r_step, old_image.shape[0]),
                       x:min(x + r_step, old_image.shape[1])] = 255
@@ -61,7 +55,7 @@ def Eykvel_binarization(old_image, diff, r_step, R_step):
 
 
 if __name__ == '__main__':
-    image_name = 'kiten.png'
+    image_name = 'chess.png'
     method_prefix = 'semitone'
     img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)
