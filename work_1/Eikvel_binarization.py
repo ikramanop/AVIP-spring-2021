@@ -13,7 +13,7 @@ def calculate_mean(data, threshold):
     return mean_1, mean_2
 
 
-def __Eykvel_binarization_helper(x, y, r_step, R_step, old_image, new_image, diff):
+def __Eikvel_binarization_helper(x, y, r_step, R_step, old_image, new_image, diff):
     s_window = old_image[y:min(y + r_step, old_image.shape[0]),
                          x:min(x + r_step, old_image.shape[1])]
     l_window = old_image[max(y - R_step // 2 + 1, 0):min(y + R_step // 2 + r_step - 1, old_image.shape[0]),
@@ -32,7 +32,10 @@ def __Eykvel_binarization_helper(x, y, r_step, R_step, old_image, new_image, dif
                       x:min(x + r_step, old_image.shape[1])] = 255
 
 
-def Eykvel_binarization(old_image, diff, r_step, R_step):
+def Eikvel_binarization(old_image, diff, r_step, R_step):
+    if r_step % 2 == 0 or R_step % 2 == 0:
+        raise Exception("Only even size of windows is supported")
+
     semi = semitone(old_image)
     new_image = np.zeros(shape=semi.shape)
 
@@ -40,12 +43,12 @@ def Eykvel_binarization(old_image, diff, r_step, R_step):
     while y + r_step <= semi.shape[0]:
         if y % 2 == 0:
             while x + r_step < semi.shape[1]:
-                __Eykvel_binarization_helper(
+                __Eikvel_binarization_helper(
                     x, y, r_step, R_step, semi, new_image, diff)
                 x += r_step
         else:
             while x - r_step > 0:
-                __Eykvel_binarization_helper(
+                __Eikvel_binarization_helper(
                     x, y, r_step, R_step, semi, new_image, diff)
                 x -= r_step
 
@@ -55,10 +58,10 @@ def Eykvel_binarization(old_image, diff, r_step, R_step):
 
 
 if __name__ == '__main__':
-    image_name = 'chess.png'
-    method_prefix = 'semitone'
+    image_name = 'integral.jpg'
+    method_prefix = 'Eikvel_binarization'
     img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)
 
-    Image.fromarray(Eykvel_binarization(
+    Image.fromarray(Eikvel_binarization(
         img_src_arr, 15, 3, 15), 'L').show()

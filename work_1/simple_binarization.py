@@ -14,7 +14,7 @@ def simple_binarization(old_image, threshold):
 
 if __name__ == '__main__':
     image_name = 'random_text.jpg'
-    method_prefix = 'semitone'
+    method_prefix = 'Simple_binarization'
     img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)
 

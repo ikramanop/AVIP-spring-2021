@@ -7,8 +7,8 @@ def semitone(old_image):
 
 
 if __name__ == '__main__':
-    image_name = 'random_text.jpg'
-    method_prefix = 'semitone'
+    image_name = 'japan.png'
+    method_prefix = 'Semitone'
     img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)
 

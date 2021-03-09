@@ -43,7 +43,7 @@ def Otsu_binarization(old_image):
 
 if __name__ == '__main__':
     image_name = 'kiwi.jpg'
-    method_prefix = 'semitone'
+    method_prefix = 'Otsu_binarization'
     img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)
 

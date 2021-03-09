@@ -20,7 +20,7 @@ if __name__ == '__main__':
     image_name = 'spiral.png'
     method_prefix = 'Bilinear_resampling'
     scale = 3
-    img_src = Image.open('pictures_src/' + image_name).convert('RGBA')
+    img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)
 
     width = img_src.size[0]
@@ -46,9 +46,6 @@ if __name__ == '__main__':
                 img_src_arr[y1, x0] + wc*img_src_arr[y0, x1] + \
                 wd*img_src_arr[y1, x1]
 
-    img_1 = Image.fromarray(img_1_array.astype(np.uint8), 'RGBA')
+    img_1 = Image.fromarray(img_1_array.astype(np.uint8), 'RGB')
 
     img_1.show()
-
-    img_1.save('pictures_results/' + image_name.split('.')[0] +
-               '_' + method_prefix + '.png', 'PNG')

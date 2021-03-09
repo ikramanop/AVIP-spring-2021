@@ -25,13 +25,10 @@ def KNN_resampling(old_image, scale):
 if __name__ == '__main__':
     image_name = 'spiral.png'
     method_prefix = 'KNN_resampling'
-    scale = 3
     img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)
 
-    img_1_array = KNN_resampling(img_src_arr, scale)
-
-    img_1 = Image.fromarray(img_1_array.astype(np.uint8), 'RGB')
-
-    img_1.save('pictures_results/' + image_name.split('.')[0] +
-               '_' + method_prefix + '.png', 'PNG')
+    img_1_array = KNN_resampling(img_src_arr, 3)
+    img_2_array = KNN_resampling(img_1_array, 1/4)
+    
+    Image.fromarray(img_2_array.astype(np.uint8), 'RGB').show()
