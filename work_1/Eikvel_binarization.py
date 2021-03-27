@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
-from semitone import semitone
-from Otsu_binarization import calculate_threshold
+from work_1.semitone import semitone
+from work_1.Otsu_binarization import calculate_threshold
 import numpy as np
 
 
@@ -58,7 +58,7 @@ def Eikvel_binarization(old_image, diff, r_step, R_step):
 
 
 if __name__ == '__main__':
-    image_name = 'integral.jpg'
+    image_name = 'psycho.png'
     method_prefix = 'Eikvel_binarization'
     img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)

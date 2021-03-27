@@ -7,7 +7,7 @@ def semitone(old_image):
 
 
 if __name__ == '__main__':
-    image_name = 'japan.png'
+    image_name = 'nyam.jpg'
     method_prefix = 'Semitone'
     img_src = Image.open('pictures_src/' + image_name).convert('RGB')
     img_src_arr = np.array(img_src)

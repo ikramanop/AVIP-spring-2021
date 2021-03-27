@@ -1,5 +1,5 @@
 from PIL import Image, ImageDraw
-from semitone import semitone
+from work_1.semitone import semitone
 import numpy as np
 import warnings
 
@@ -30,8 +30,12 @@ def calculate_threshold(image):
     return base[i_max]
 
 
-def Otsu_binarization(old_image):
-    semi = semitone(old_image)
+def Otsu_binarization(old_image, semitone_needed=True):
+    if semitone_needed:
+        semi = semitone(old_image)
+    else:
+        semi = old_image
+
     new_image = np.zeros(shape=semi.shape)
 
     t = calculate_threshold(semi)
