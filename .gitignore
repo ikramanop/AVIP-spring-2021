@@ -1,5 +1,5 @@
-pictures_results/
 .DS_Store
 .vscode/
 **/__pycache__/
 **/test.py
+AVIP_spring_2021.egg-info
