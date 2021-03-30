@@ -35,10 +35,17 @@ def rank_filter(img, size, threshold):
 
 
 if __name__ == '__main__':
-    image_name = 'salty.png'
+    image_name = 'nando_binary.png'
     method_prefix = 'rank'
     img_src = Image.open('pictures_src/' + image_name).convert('L')
     img_src_arr = np.array(img_src)
 
-    Image.fromarray(rank_filter(
-        img_src_arr, 3, 3), 'L').show()
+    for i in range(1, 10):
+        Image.fromarray(
+            rank_filter(
+                img=img_src_arr,
+                size=3,
+                threshold=i
+            ),
+            'L'
+        ).save(f"pictures_results/work_2/{image_name.split('_')[0]}/{i}_of_9.png")

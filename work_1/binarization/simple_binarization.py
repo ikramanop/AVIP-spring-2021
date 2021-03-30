@@ -1,10 +1,13 @@
 from PIL import Image, ImageDraw
-from work_1.semitone import semitone
+from work_1.semitone.semitone import semitone
 import numpy as np
 
 
-def simple_binarization(old_image, threshold):
-    semi = semitone(old_image)
+def simple_binarization(old_image, threshold, semitone_needed=True):
+    if semitone_needed:
+        semi = semitone(old_image)
+    else:
+        semi = old_image
     new_image = np.zeros(shape=semi.shape)
 
     new_image[semi > threshold] = 255
