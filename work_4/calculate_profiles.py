@@ -1,26 +1,34 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from PIL import Image
+from .static import KZ_LETTERS
 
-from static import KZ_LETTERS
+
+def get_profiles(img):
+    return {
+        'x': {
+            'y': np.sum(img, axis=0),
+            'x': np.arange(
+                start=1, stop=img.shape[1] + 1).astype(int)
+        },
+        'y': {
+            'y': np.arange(
+                start=1, stop=img.shape[0] + 1).astype(int),
+            'x': np.sum(img, axis=1)
+        }
+    }
 
 
 def write_profile(img, iter, type='x'):
-    if type == 'x':
-        profile_y = np.sum(img, axis=0)
-        profile_x = np.arange(
-            start=1, stop=img.shape[1] + 1).astype(int)
+    profiles = get_profiles(img)
 
-        plt.bar(x=profile_x, height=profile_y, width=0.9)
+    if type == 'x':
+        plt.bar(x=profiles['x']['x'], height=profiles['x']['y'], width=0.9)
 
         plt.ylim(0, 52)
 
     elif type == 'y':
-        profile_y = np.sum(img, axis=1)
-        profile_x = np.arange(
-            start=1, stop=img.shape[0] + 1).astype(int)
-
-        plt.barh(y=profile_x, width=profile_y, height=0.9)
+        plt.barh(y=profiles['y']['y'], width=profiles['y']['x'], height=0.9)
 
         plt.ylim(52, 0)
 

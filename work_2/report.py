@@ -12,5 +12,5 @@ if __name__ == '__main__':
                 file.write(f"""
 #### {i}/9
 
-![](../pictures_results/work_2/{dirr}/{i}_of_9.png)
+![{dirr}](../pictures_results/work_2/{dirr}/{i}_of_9.png)
 """)

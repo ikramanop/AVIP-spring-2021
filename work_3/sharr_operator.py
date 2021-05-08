@@ -1,9 +1,7 @@
 import numpy as np
-from PIL import Image, ImageDraw
-
+from PIL import Image
 from work_1.semitone.semitone import semitone
 from work_1.binarization.Otsu_binarization import Otsu_binarization
-from work_1.binarization.simple_binarization import simple_binarization
 
 
 def __sharr_operator_helper(img, new_image, x, y, type):
@@ -67,6 +65,3 @@ if __name__ == '__main__':
     )
 
     img.show()
-    # img.save(
-    #     f"pictures_results/work_3/{image_name.split('.')[0]}_{method_prefix}_{type}.png"
-    # )

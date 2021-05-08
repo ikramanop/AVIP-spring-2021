@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw
+from PIL import Image
 import numpy as np
 
 
@@ -30,5 +30,5 @@ if __name__ == '__main__':
 
     img_1_array = KNN_resampling(img_src_arr, 3)
     img_2_array = KNN_resampling(img_1_array, 1/4)
-    
+
     Image.fromarray(img_2_array.astype(np.uint8), 'RGB').show()
