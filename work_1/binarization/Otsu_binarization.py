@@ -1,7 +1,6 @@
-from PIL import Image, ImageDraw
-from work_1.semitone import semitone
+from PIL import Image
+from work_1.semitone.semitone import semitone
 import numpy as np
-import warnings
 
 
 def calculate_threshold(image):

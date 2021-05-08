@@ -1,38 +1,44 @@
 # Лабораторная работа №1. Передискретизация, обесцвечивание и бинаризация растровых изображений
 
 Реализованы:
+
 - Передискретизация методом ближайшего соседа
 - Приведение к полутону (формула для Photoshop)
 - Бинаризация:
-    - Глобальная с заданным порогом
+  - Глобальная с заданным порогом
     - Глобальная методом Отсу
     - Адаптивная методом Эйквилла
 
 ## Передискретизация изображений
+
 В качестве алгоритма интерполяции и децимации (заполнения "пустых" / удаления "лишних" пикселей) был выбран метод ближайшего соседа
+
 ### Растяжение (интерполяция) изображения в M раз
-![](../pictures_src/spiral.png)
+
+![Spiral](../pictures_src/spiral.png)
 Исходное изображение
-![](../pictures_results/work_1/sampling/spiral_x3.png)
+![Spiral](../pictures_results/work_1/sampling/spiral_x3.png)
 Увеличенное в 3 раза изображение
 
-![](../pictures_src/corner.png)
+![Corner](../pictures_src/corner.png)
 Исходное изображение
-![](../pictures_results/work_1/sampling/corner_x4.png)
+![Corner](../pictures_results/work_1/sampling/corner_x4.png)
 Увеличенное в 4 раза изображение
 
 Увеличенное изображение остаётся распознаваемым, а объекты на нём - читаемыми, однако появляются следующие артефакты:
     - вокруг прямых длинных линий появилось "свечение" (звон);
     - гладкие объекты становится "шершавыми", покрываются "лесенками" (пикселизация).
+
 ### Сжатие (децимация) изображения в N раз
-![](../pictures_src/spiral.png)
+
+![Spiral](../pictures_src/spiral.png)
 Исходное изображение
-![](../pictures_results/work_1/sampling/spiral_sh4.png)
+![Spiral](../pictures_results/work_1/sampling/spiral_sh4.png)
 Уменьшенное в 4 раза изображение
 
-![](../pictures_src/corner.png)
+![Corner](../pictures_src/corner.png)
 Исходное изображение
-![](../pictures_results/work_1/sampling/corner_x3.png)
+![Corner](../pictures_results/work_1/sampling/corner_x3.png)
 Уменьшенное в 3 раза изображение
 
 Уменьшенное изображение остаётся распознаваемым, однако появляются следующие артефакты:
@@ -40,36 +46,42 @@
     - пропадают части объектов.
 
 ### Передискретизация в K=M/N раз
+
 #### В два прохода
-![](../pictures_src/spiral.png)
+
+![Spiral](../pictures_src/spiral.png)
 Исходное изображение
-![](../pictures_results/work_1/sampling/spiral_two_x3-4.png)
+![Spiral](../pictures_results/work_1/sampling/spiral_two_x3-4.png)
 Уменьшенное в 3/4 раза изображение
 
-![](../pictures_src/corner.png)
+![Corner](../pictures_src/corner.png)
 Исходное изображение
-![](../pictures_results/work_1/sampling/corner_two_x4-3.png)
+![Corner](../pictures_results/work_1/sampling/corner_two_x4-3.png)
 Увеличенное в 4/3 раза изображение
 
 #### В один проход
-![](../pictures_src/spiral.png)
+
+![Spiral](../pictures_src/spiral.png)
 Исходное изображение
-![](../pictures_results/work_1/sampling/spiral_one_x3-4.png)
+![Spiral](../pictures_results/work_1/sampling/spiral_one_x3-4.png)
 Уменьшенное в 3/4 раза изображение
 
-![](../pictures_src/corner.png)
+![Corner](../pictures_src/corner.png)
 Исходное изображение
-![](../pictures_results/work_1/sampling/corner_one_x4-3.png)
+![Corner](../pictures_results/work_1/sampling/corner_one_x4-3.png)
 Увеличенное в 4/3 раза изображение
 
 #### Сравнение
+
 В целом, оба метода (в один и два прохода) довольно идентичны, однако можно заметить, что при использовании передискретизации в один проход изображение подвержено меньшей пикселизации, так как появляется меньше "накопленного" дефекта от метода ближайшего соседа.
 
 ## Приведение изображения к полутоновому
+
 ### Формула Photoshop
-![](../pictures_src/japan.png)
+
+![Japan](../pictures_src/japan.png)
 Исходное изображение
-![](../pictures_results/work_1/semitone/japan_semi.png)
+![Japan](../pictures_results/work_1/semitone/japan_semi.png)
 Приведённое к полутоновому
 
 ## Бинаризация изображений методом Эйквила
@@ -77,48 +89,61 @@
 ### Изображение рукописного текста
 
 #### Исходное изображение
-![](../pictures_src/integral.jpg)
+
+![Integral](../pictures_src/integral.jpg)
 
 #### Полутоновое изображение
-![](../pictures_results/work_1/semitone/integral_semitone.png)
+
+![Integral](../pictures_results/work_1/semitone/integral_semitone.png)
 
 #### Бинаризированное изображение
-![](../pictures_src/integral_binary.png)
+
+![Integral](../pictures_src/integral_binary.png)
 
 ### Портрет
 
 #### Исходное изображение
-![](../pictures_src/nando.jpg)
+
+![Nando](../pictures_src/nando.jpg)
 
 #### Полутоновое изображение
-![](../pictures_results/work_1/semitone/nando_semitone.png)
+
+![Nando](../pictures_results/work_1/semitone/nando_semitone.png)
 
 #### Бинаризированное изображение
-![](../pictures_src/nando_binary.png)
+
+![Nando](../pictures_src/nando_binary.png)
 
 ### Изображение печатного текста
 
 #### Исходное изображение
-![](../pictures_src/random_text.jpg)
+
+![Text](../pictures_src/random_text.jpg)
 
 #### Полутоновое изображение
-![](../pictures_results/work_1/semitone/text_semitone.png)
+
+![Text](../pictures_results/work_1/semitone/text_semitone.png)
 
 #### Бинаризированное изображение
-![](../pictures_src/text_binary.png)
+
+![Text](../pictures_src/text_binary.png)
 
 ### Мультяшное изображение
 
 #### Исходное изображение
-![](../pictures_src/shakal.png)
+
+![Shakal](../pictures_src/shakal.png)
 
 #### Полутоновое изображение
-![](../pictures_results/work_1/semitone/shakal_semitone.png)
+
+![Shakal](../pictures_results/work_1/semitone/shakal_semitone.png)
 
 #### Бинаризированное изображение
-![](../pictures_src/shakal_binary.png)
+
+![Shakal](../pictures_src/shakal_binary.png)
 
 ### Анализ
+
 Метод Эйквила - метод адаптивной бинаризации изображений, поэтому его преимущества видны при бинаризации картинок, имеющих разный уровень яркости, области тени, а также цветовые неровности (пример - фотография печатного текста).
 Метод хорошо выделяет отдельные объекты (контуры лиц, рукописный текст) и обрабатывает мультяшных персонажей (пример - интегралы и шакал). Он может подойти для предварительной обработки изображений с целью дальнейшего анализа объектов.
 Большой недостаток метода - создание большого количества "случайного" шума, а также неприспособленность к "краевым ситуациям" (можно наблюдать на бинаризованных изображениях по краям).

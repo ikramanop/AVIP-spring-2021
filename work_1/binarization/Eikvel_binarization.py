@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
-from work_1.semitone import semitone
-from work_1.Otsu_binarization import calculate_threshold
+from work_1.semitone.semitone import semitone
+from work_1.binarization.Otsu_binarization import calculate_threshold
 import numpy as np
 
 

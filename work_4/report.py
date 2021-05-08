@@ -1,5 +1,5 @@
-from work_4.static import KZ_LETTERS
 import csv
+from work_4.static import KZ_LETTERS
 
 if __name__ == '__main__':
     with open('./work_4/out/data.csv', 'r') as csv_file:

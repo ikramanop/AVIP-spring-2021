@@ -1,26 +1,44 @@
-from PIL import Image, ImageDraw
+from work_4.calculate_profiles import get_profiles
+from PIL import Image
 import numpy as np
 import csv
-from static import KZ_LETTERS
+from work_4.static import KZ_LETTERS
 
 
-def calculate_features(img, letter):
+def first_nonzero(arr, axis, invalid_val=-1):
+    mask = arr != 0
+    return np.where(mask.any(axis=axis), mask.argmax(axis=axis), invalid_val)
+
+
+def last_nonzero(arr, axis, invalid_val=-1):
+    mask = arr != 0
+    val = arr.shape[axis] - np.flip(mask, axis=axis).argmax(axis=axis) - 1
+    return np.where(mask.any(axis=axis), val, invalid_val)
+
+
+def calculate_features(img):
     img_b = np.zeros(shape=img.shape)
-
     img_b[img != 255] = 1
 
+    profiles = get_profiles(img_b)
+
+    img_b = img_b[first_nonzero(profiles['y']['x'], 0): last_nonzero(
+        profiles['y']['x'], 0) + 1, first_nonzero(profiles['x']['y'], 0): last_nonzero(profiles['x']['y'], 0) + 1]
+
     weight = img_b.sum()
-    rel_weight = weight / img_b.shape[0] * img_b.shape[1]
+    rel_weight = weight / (img_b.shape[0] * img_b.shape[1])
 
     x_avg = 0
     for x, column in enumerate(img_b.T):
         x_avg += sum((x + 1) * column)
-    rel_x_avg = (x_avg-1)/(weight-1)
+    x_avg = x_avg/weight
+    rel_x_avg = (x_avg-1)/(img_b.shape[1]-1)
 
     y_avg = 0
     for y, row in enumerate(img_b):
         y_avg += sum((y + 1) * row)
-    rel_y_avg = (y_avg-1)/(weight-1)
+    y_avg = y_avg/weight
+    rel_y_avg = (y_avg-1)/(img_b.shape[0]-1)
 
     iner_x = 0
     for y, row in enumerate(img_b):
@@ -33,7 +51,6 @@ def calculate_features(img, letter):
     rel_iner_y = iner_y/(img_b.shape[0]**2 + img_b.shape[1]**2)
 
     return {
-        'letter': letter,
         'weight': weight,
         'rel_weight': rel_weight,
         'center': (x_avg, y_avg),
@@ -52,7 +69,11 @@ if __name__ == '__main__':
         writer.writeheader()
 
         for i, letter in enumerate(KZ_LETTERS):
-            img_src = Image.open(f'work_4/alphabet/{i+1}.png').convert('L')
+            img_src = Image.open(
+                f'work_4/alphabet/base/{i+1}.png').convert('L')
             img_src_arr = np.array(img_src)
 
-            writer.writerow(calculate_features(img_src_arr, letter))
+            features = calculate_features(img_src_arr)
+            features['letter'] = letter
+
+            writer.writerow(features)
